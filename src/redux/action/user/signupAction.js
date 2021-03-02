@@ -4,11 +4,6 @@ export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
 export const CREATE_USER_ERROR = "CREATE_USER_ERROR";
 
 export const createUser = (userName,email, password) => async (dispatch) => {
-  dispatch({
-    type: "PAGE_LOADER",
-    PageLoader: true,  
-  });
-
  await axios
     .post(`https://chat-app-mujohn.herokuapp.com/api/auth/signup`, {
         userName,

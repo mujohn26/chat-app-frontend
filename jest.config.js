@@ -27,7 +27,7 @@ module.exports = {
 		'!**/vendor/**',
 		'!**/*.eslintrc.js',
 		'!**/coverage/**',
-		'!**/__mocks__/**',
+		'!**/__mockData__/**',
 		'!**/__tests__/**',
 		'!**/setupTests.js',
 		'!**/src/index.js',
@@ -35,6 +35,7 @@ module.exports = {
 		'!**/src/theme.js',
 		'!**/src/redux/reducers/index.js',
 		'!**/src/redux/store/index.js',
+		'!**/build/**'
 	],
 
 	// The directory where Jest should output its coverage files

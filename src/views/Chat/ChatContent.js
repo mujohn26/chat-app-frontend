@@ -36,16 +36,7 @@ export default class ChatContent extends React.Component {
     socket.emit("new-user", userData);
 
     socket.on("user-connected", (data) => {
-      // const dataMessage = messageData.filter(
-      //   (item) => item.id !== "connected_user"
-      // );
-      // messageData.push(dataMessage);
-      // messageData.push({
-      //   id: "connected_user",
-      //   connectedUserName: data.name,
-      //   email: this.state.userName,
-      //   type: "connect",
-      // });
+
       this.setState({
         name: data.name,
         isJoined: true,
@@ -65,7 +56,8 @@ export default class ChatContent extends React.Component {
       messages: this.props.activeSubChat.data,
     });
 
-    console.log('=-=-=-=-=-=-', this.props.activeSubChat.data)
+    console.log("=-=-=-=-=-=-=-=-=",this.props.activeSubChat.data);
+
   }
 
   handleDisconnect() {
@@ -84,28 +76,13 @@ export default class ChatContent extends React.Component {
     });
   }
 
-  handleSendMessage() {
+  async handleSendMessage() {
     socket = io(ENDPOINT);
     const messagesData = {
       token: this.state.token,
       message: this.state.message,
     };
     socket.emit("send-chat-message", messagesData);
-
-    socket.on("chat-message", (data) => {
-      this.setState({
-        messages: [
-          ...this.state.messages,
-          {
-            id: this.state.userId,
-            message: data.message,
-            receivername: data.receivername,
-            senderid: this.state.userId,
-
-          },
-        ],
-      });
-    });
   }
   handleChange(event) {
     this.setState({
@@ -113,6 +90,27 @@ export default class ChatContent extends React.Component {
     });
   }
 
+  componentDidMount() {
+    socket = io(ENDPOINT);
+
+    socket.on("chat-message", async (data) => {
+      console.log("=-=-=-=-=-=-=-=== OnMessage");
+
+      this.setState({
+        messages: [
+          ...this.state.messages,
+          {
+            id: this.state.userId,
+            message: data.message,
+            receivername: data.receivername,
+            senderid: data.senderid,
+            sendername: data.sendername,
+          },
+        ],
+        message: "",
+      });
+    });
+  }
   render() {
     const { activeSubChat } = this.props;
     return (
@@ -131,57 +129,74 @@ export default class ChatContent extends React.Component {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div className="content__chat__image__container">
-          {this.state.messages.length ===0?(
-            <div style={{marginTop:"50%", marginLeft:"30%"}}>No messages yet</div>
-          ):(
-           <>
-            {this.state.messages.map((data) => {
-              return (
-                <div style={{ marginTop: "5%" }}>
-                  <>
-                    {data.senderid !== this.state.userId ? (
-                      <div
-                        style={{
-                          marginLeft: "40%",
-                          marginBottom: "5%",
-                          backgroundColor: "#fa38a6",
-                          minHeight: "70px",
-                          borderRadius: "20px 20px 0px 20px",
-                          color: "white",
-                        }}
-                      >
-                        <p style={{ marginLeft: "5%" }}>{data.message}</p>
-                      </div>
-                    ) : (
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <div>
-                          <img src={profile} height="25" width="25" />
-                        </div>
-                        <div
-                          style={{
-                            marginLeft: "1%",
-                            marginBottom: "5%",
-                            backgroundColor: "white",
-                            minHeight: "70px",
-                            width: "50%",
-                            borderRadius: "0px 20px 20px 20px",
-                            color: "black",
-                            boxShadow:
-                              "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
-                          }}
-                        >
-                          <p style={{ marginLeft: "5%" }}>{data.message}</p>
-                        </div>
-                      </div>
-                    )}
-                  </>
-                </div>
-              );
-            })}
+            {this.state.messages.length === 0 ? (
+              <div style={{ marginTop: "50%", marginLeft: "30%" }}>
+                No messages yet
+              </div>
+            ) : (
+              <>
+                {this.state.messages.map((data) => {
+                  return (
+                    <div style={{ marginTop: "5%" }}>
+                      <>
+                        {data.senderid !== this.state.userId ? (
+                          <>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                marginLeft: "40%",
+                                marginBottom: "5%",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  backgroundColor: "#fa38a6",
+                                  minHeight: "70px",
+                                  borderRadius: "20px 20px 0px 20px",
+                                  color: "white",
+                                  padding:"10px 10px 10px 10px"
 
-           </> 
-          )}
-
+                                }}
+                              >
+                                <p style={{ marginLeft: "5%" }}>
+                                  {data.message}
+                                </p>
+                              </div>
+                              <div style={{fontSize:"12px", marginLeft:"5%"}}>{data.sendername}</div>
+                            </div>
+                          </>
+                        ) : (
+                          <div
+                            style={{ display: "flex", flexDirection: "row" }}
+                          >
+                            <div>
+                              <img src={profile} height="25" width="25" />
+                            </div>
+                            <div
+                              style={{
+                                marginLeft: "1%",
+                                marginBottom: "3%",
+                                backgroundColor: "white",
+                                minHeight: "70px",
+                                width: "50%",
+                                padding:"10px 10px 10px 10px",
+                                borderRadius: "0px 20px 20px 20px",
+                                color: "black",
+                                boxShadow:
+                                  "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+                              }}
+                            >
+                              <p style={{ marginLeft: "5%" }}>{data.message}</p>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    </div>
+                  );
+                })}
+              </>
+            )}
           </div>
           <div style={{ textAlign: "center", fontSize: "15px" }}>
             {this.state.name !== ""
@@ -218,7 +233,9 @@ export default class ChatContent extends React.Component {
                   : this.handleConnect.bind(this)
               }
             >
-              <p style={{ marginTop: "30%", marginLeft: "15%", color:"black" }}>
+              <p
+                style={{ marginTop: "30%", marginLeft: "15%", color: "black" }}
+              >
                 {this.state.isJoined ? "Online" : "Join"}
               </p>
             </div>
@@ -228,11 +245,13 @@ export default class ChatContent extends React.Component {
                 id="fname"
                 name="message"
                 placeholder="Type a messsage here.."
+                value={this.state.message}
                 style={{
                   width: "350px",
                   height: "50px",
                   border: "0px",
                   marginLeft: "15%",
+                  
                 }}
                 onChange={this.handleChange.bind(this)}
               />

@@ -9,10 +9,6 @@ export const GetUserMessages = () => async (dispatch) => {
     "Content-Type": "application/json",
     token: userToken,
   };
-  dispatch({
-    type: "PAGE_LOADER",
-    PageLoader: true,  
-  });
 
  await axios
     .get(`https://chat-app-mujohn.herokuapp.com/api/messages`, {
@@ -22,7 +18,7 @@ export const GetUserMessages = () => async (dispatch) => {
         dispatch(getAUserMessagesSuccess(res.data.messageDatas));
     })
     .catch(async(error) => {
-        const errorMessage = 'error.response.data.error';
+        const errorMessage = 'could not get message successfully';
         dispatch(getUserMessagesError(errorMessage));
 
     });

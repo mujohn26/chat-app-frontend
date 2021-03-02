@@ -7,7 +7,7 @@ const history = createBrowserHistory({
   forceRefresh: true,
 });
 
-class LoginPage extends Component {
+export class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,6 +50,7 @@ class LoginPage extends Component {
               name="email"
               required=""
               onChange={this.handleChange.bind(this)}
+              data-test="email-field"
             />
             <label>Email</label>
           </div>
@@ -59,6 +60,7 @@ class LoginPage extends Component {
               name="password"
               required=""
               onChange={this.handleChange.bind(this)}
+              data-test="password-field"
             />
             <label>Password</label>
           </div>

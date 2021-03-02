@@ -4,7 +4,7 @@ import "./App.css";
 import Main from "./index";
 import { GetUserMessages } from "../redux/action/message/index";
 
-class App extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

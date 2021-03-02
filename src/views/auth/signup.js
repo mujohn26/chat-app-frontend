@@ -7,7 +7,7 @@ const history = createBrowserHistory({
   forceRefresh: true,
 });
 
-class SignupPage extends Component {
+export class SignupPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,8 +36,8 @@ class SignupPage extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.sucessMessage !== prevProps.sucessMessage) {
-        history.push("/chat");
-        history.go();
+      history.push("/chat");
+      history.go();
     }
   }
   render() {
@@ -51,6 +51,8 @@ class SignupPage extends Component {
               name="userName"
               required={true}
               onChange={this.handleChange.bind(this)}
+              data-test="username-field"
+
             />
             <label>Username</label>
           </div>
@@ -60,6 +62,8 @@ class SignupPage extends Component {
               name="email"
               required={true}
               onChange={this.handleChange.bind(this)}
+              data-test="email-field"
+
             />
             <label>Email</label>
           </div>
@@ -69,6 +73,7 @@ class SignupPage extends Component {
               name="password"
               required={true}
               onChange={this.handleChange.bind(this)}
+              data-test="password-field"
             />
             <label>Password</label>
           </div>
@@ -82,13 +87,17 @@ class SignupPage extends Component {
             </div>
           </div>
           {this.props.error && this.props.error ? (
-            <div style={{ marginTop: "5%", color: "red"}}>
+            <div style={{ marginTop: "5%", color: "red" }}>
               {this.props.error}
             </div>
           ) : (
             ""
           )}
-          <a  onClick={this.handleSubmit.bind(this)} style={{cursor:"pointer"}}>
+          <a
+            onClick={this.handleSubmit.bind(this)}
+            style={{ cursor: "pointer" }}
+            
+          >
             <span></span>
             <span></span>
             <span></span>
