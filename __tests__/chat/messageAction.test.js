@@ -11,14 +11,14 @@ import axios from 'axios';
 import expect from 'expect';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-describe('Create accomodation facility  actions', () => {
+describe('Messages actions', () => {
 	beforeEach(() => {
 		moxios.install(axios);
 	});
 	afterEach(() => {
 		moxios.uninstall(axios);
 	});
-	it('should get accommodation facility successfully', async () => {
+	it('should get messages facility successfully', async () => {
 		moxios.wait(() => {
 			const request = moxios.requests.mostRecent();
 			request.respondWith({
@@ -56,24 +56,24 @@ describe('Create accomodation facility  actions', () => {
 		});
 	});
 
-    // it('should get error when getting messages', async () => {
-	// 	moxios.wait(() => {
-	// 		const request = moxios.requests.mostRecent();
-	// 		request.reject({
-	// 			status: 404,
-	// 			error: 'not found',
-	// 		});
-	// 	});
-	// 	const expectedActions = [
+    it('should get error when getting messages', async () => {
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent();
+			request.reject({
+				status: 404,
+				error: 'not found',
+			});
+		});
+		const expectedActions = [
 
-	// 		{
-    //              payload: "could not get message successfully",
-    //              type: GET_USER_MESSAGES_ERROR,
-	// 		},
-	// 	];
-	// 	const store = mockStore({});
-	// 	await store.dispatch(GetUserMessages()).then(async () => {
-	// 		expect(store.getActions()).toEqual(expectedActions);
-	// 	});
-	// });
+			{
+                 payload: "could not get message successfully",
+                 type: GET_USER_MESSAGES_ERROR,
+			},
+		];
+		const store = mockStore({});
+		await store.dispatch(GetUserMessages()).then(async () => {
+			expect(store.getActions()).toEqual(expectedActions);
+		});
+	});
 });

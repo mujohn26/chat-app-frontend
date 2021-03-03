@@ -5,14 +5,15 @@ This is real time chat application . Where two or more users can be able to chat
 ## ChatApp Screenshot
 
 ### Light mode
-![Screenshot from 2021-03-01 19-58-53](https://user-images.githubusercontent.com/52497006/109538595-f22cc400-7ac8-11eb-91e2-d94c351a209c.png)
-![Screenshot from 2021-03-01 19-43-09](https://user-images.githubusercontent.com/52497006/109538600-f3f68780-7ac8-11eb-853b-3e5b789e2fc9.png)
+![Screenshot from 2021-03-03 10-47-05](https://user-images.githubusercontent.com/52497006/109778812-ebf43000-7c0d-11eb-9109-deafaf7545fe.png)
+![Screenshot from 2021-03-03 10-46-53](https://user-images.githubusercontent.com/52497006/109778820-edbdf380-7c0d-11eb-929e-992388154d52.png)
 
 ### Black mode 
-![Screenshot from 2021-03-01 19-59-05](https://user-images.githubusercontent.com/52497006/109538484-d1646e80-7ac8-11eb-959d-2a08cd97f778.png)
-![Screenshot from 2021-03-01 19-43-16](https://user-images.githubusercontent.com/52497006/109538493-d2959b80-7ac8-11eb-84e0-4becb7cae8cf.png)
+![Screenshot from 2021-03-03 10-48-36](https://user-images.githubusercontent.com/52497006/109780024-3fb34900-7c0f-11eb-8311-1d827c39a029.png)
+![Screenshot from 2021-03-03 10-47-17](https://user-images.githubusercontent.com/52497006/109780028-417d0c80-7c0f-11eb-8cb9-d3a939629294.png)
 
-### Authentication
+
+### Authentication(Signup and Login form)
 
 ![Screenshot from 2021-03-01 20-03-40](https://user-images.githubusercontent.com/52497006/109538874-3e780400-7ac9-11eb-93cd-4e64a3147fde.png)
 ![Screenshot from 2021-03-01 20-03-27](https://user-images.githubusercontent.com/52497006/109538881-4041c780-7ac9-11eb-8c9a-ad5b2593fd4a.png)
