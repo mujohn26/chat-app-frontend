@@ -94,7 +94,6 @@ export default class ChatContent extends React.Component {
     socket = io(ENDPOINT);
 
     socket.on("chat-message", async (data) => {
-      console.log("=-=-=-=-=-=-=-=== OnMessage");
 
       this.setState({
         messages: [
@@ -107,7 +106,7 @@ export default class ChatContent extends React.Component {
             sendername: data.sendername,
           },
         ],
-        message: "",
+        message: data.senderid === this.state.userId?"":this.state.message,
       });
     });
   }
