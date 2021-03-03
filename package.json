@@ -31,6 +31,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "moxios": "^0.4.0",
+    "pretest": "^1.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-input-switch": "^2.2.2",
@@ -55,7 +56,8 @@
     "build": "react-scripts build",
     "test": "jest --updateSnapshot --watch --config jest.config.js",
     "test:ci": "jest --updateSnapshot --no-cache --maxWorkers=2 --config jest.config.js --coverage -u",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "coverage": "npm run test:ci && jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "eslintConfig": {
     "extends": [
